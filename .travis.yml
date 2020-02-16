@@ -1,5 +1,7 @@
 language: go
 os: linux
+services:
+  - docker
 go:
 - '1.13'
 jobs:
@@ -10,7 +12,8 @@ jobs:
     - make vendor
     - make test
     - make integration-test
-    - make compile
+    - make image
+    - make push-image
     deploy:
       provider: releases
       file_glob: true
