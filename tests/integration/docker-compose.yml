@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  fromgotok8s:
+    networks:
+      - test
+    container_name: integration_fromgotok8s
+    build:
+      context: ../../
+      dockerfile: tests/integration/Dockerfile
+    entrypoint: /bin/yes
+
+  web:
+    networks:
+      - test
+    image: nginx
+
+networks:
+  test:
+    driver: bridge

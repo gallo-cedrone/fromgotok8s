@@ -1,0 +1,23 @@
+language: go
+os: linux
+go:
+- '1.13'
+jobs:
+  include:
+  - stage: tests and compile
+    os: linux
+    script:
+    - make vendor
+    - make test
+    - make integration-test
+    - make compile
+    deploy:
+      provider: releases
+      file_glob: true
+      token:
+        secure: "fxh6KsPjIQib+UABXbDs+BY7rrQULU9TjEhIFY4CcOyW2xaM5Udq6PVf/+MStwlQO00QmZiK8ud01zkooltXDCj5g25kYUjrePyjvK8vHjNg5QSRoZOBzdNG9B8kIT8LmMix6yiFrwFn8EU+JRlzxZO/IA2kJMCntk7IMrJpdVzruJHanM3yy97y4jBKB2ZDzNA1C0RE3tbetLWW82G0FgcvsNtVWVt0nyKszImJc3TU02AZYGnFhHWOvTF0l13lbDUNJQbyneFPqNs9iJZBSdW0oGPBY5t5FZhuJX7mWEHMu16hI7RAQ4S5n5rzDHTFooJ0EevamuiMp46hrhcEA3nBrh2lHKIMAgGrhMWnRzbr3Mz0BsaeDslf1xdp0rlR2WBYFOJJWzESW+MZ2sBuFhlUZXBXs06ZVI9oEreGovP+5lABJwPONJeO4b6AsFBtWlGuekTC2Gu/lwaF9uIhC5Tks8VZc1o3OKVl2BKqyiYSJ+fEsi/RYPEOBBAza8hGTHIuzJro0W2dvLCa3LvUB1UTvLVQOu8zIpiihq4nvslkEMEWsg0Kj0SQTZBw9bvUE2l0t0zkCHm9PkRI7rKmBybf2o/czNUYhKdfzc+q5elOSnxVPpUDxYfYb+SKxt1aGnNumU5wDOP28GC1MfAWCMBfMw5u8P9p3iCRjS3cVn0="
+      file:
+      - "./bin/*"
+      skip_cleanup: true
+      on:
+        tags: true
