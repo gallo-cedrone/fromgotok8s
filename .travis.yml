@@ -6,11 +6,33 @@ jobs:
   include:
   - stage: tests and compile
     os: linux
+    install:
+      - go get golang.org/x/tools/cmd/cover
+      - go get github.com/mattn/goveralls
     script:
-    - make vendor
-    - make test
-    - make integration-test
-    - make compile
+      - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+      - make test
+      - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci
+      - make integration-test
+  - stage: build and push image
+    os: linux
+    script:
+      - export TRAVIS_TAG_SANITIZED=${TRAVIS_TAG:-latest}
+      - export TRAVIS_TAG_SANITIZED=${TRAVIS_TAG_SANITIZED//[^a-z0-9$]/}
+      - export TRAVIS_BRANCH_SANITIZED=${TRAVIS_BRANCH:-develop}
+      - export TRAVIS_BRANCH_SANITIZED=${TRAVIS_BRANCH_SANITIZED//[^a-z0-9$]/}
+      - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+      - make tools-and-vars
+      - make compile
+      - make image
+      - |
+        if [ ${TRAVIS_PULL_REQUEST} != "false" ] ; then
+          exit 0
+        fi
+        make push-image
+        make add-repo
+        make set-cluster
+        make push-app
     deploy:
       provider: releases
       file_glob: true
