@@ -7,7 +7,7 @@ services:
     container_name: integration_fromgotok8s
     build:
       context: ../../
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
     entrypoint: /bin/yes
 
   web:

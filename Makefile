@@ -9,6 +9,7 @@ compile:
 
 test:
 	@echo "=== [ test ]: running unit tests..."
+	@go clean -cache -testcache
 	@go test $(GO_FILES)
 
 vendor:
@@ -17,6 +18,7 @@ vendor:
 
 integration-test:
 	@echo "=== [ integration test ]: running integration tests..."
+	@go clean -cache -testcache
 	@docker-compose -f tests/integration/docker-compose.yml up -d --build
 	@go test -v -tags=integration ./tests/integration/. || (ret=$$?; docker-compose -f tests/integration/docker-compose.yml down && exit $$ret)
 	@docker-compose -f tests/integration/docker-compose.yml down
