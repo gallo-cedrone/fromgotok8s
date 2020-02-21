@@ -1,6 +1,6 @@
-# FROMGOTOK8S
+![fromgotok8s](fromgotok8s.png)
 
-This GitHub page is used mostly to be used as a static public Chartmuseum
+This GitHub page is used mostly to be used as a static public Chartmuseum and it is part of a full example of Ci/CD described in this medium article.
 
 To build the helm package to add it to the static chartmuseum
 ```sh
@@ -12,9 +12,15 @@ To generate the needed index.yaml page
 helm repo index .
 ```
 
+To review the index generated once the branch has been pushed go to 
+ 
+ - https://gallo-cedrone.github.io/fromgotok8s/index.yaml
+
 To make use of the static public Chartmuseum
 ```sh
-helm init
 helm repo add static-gallo-cedrone-repo https://gallo-cedrone.github.io/fromgotok8s
 helm repo update
 ```
+
+
+![Let's GO!](go.gif)
