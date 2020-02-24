@@ -1,7 +1,8 @@
 # Don't assume PATH settings
 export PATH := $(PATH):$(GOPATH)/bin
-BINARY_NAME   = fromgotok8s
+BINARY_NAME   := fromgotok8s
 GO_FILES     := ./src/
+TRAVIS_TAG ?= latest 
 
 compile:
 	@echo "=== [ compile ]: building $(BINARY_NAME)..."
@@ -28,8 +29,12 @@ image:
 	@docker build -t pgallina/fromgotok8s:latest .
 
 push-image:
-	@echo "=== [ push ]: pushing image..."
+	@echo "=== [ push-image ]: pushing image..."
 	@docker login --username $(DOCKER_USERNAME) --password $(DOCKER_PASSWORD)
 	@docker push pgallina/fromgotok8s:latest
 
-.PHONY: compile test integration-test vendor image push
+push-app:
+	@echo "=== [ push-app ]: pushing app to k8s..."
+	@helm upgrade --install fromgotok8s-${TRAVIS_TAG} static-gallo-cedrone-repo/fromgotok8s   --set image.version=${TRAVIS_TAG}
+
+.PHONY: compile test integration-test vendor image push-image push-app

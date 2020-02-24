@@ -15,6 +15,7 @@ jobs:
     script:
       - make image
       - make push-image
+      - make push-app
     deploy:
       provider: releases
       file_glob: true
