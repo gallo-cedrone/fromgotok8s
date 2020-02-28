@@ -2,8 +2,8 @@
 export PATH := $(PATH):$(GOPATH)/bin
 BINARY_NAME := fromgotok8s
 GO_FILES    := ./src/
-TRAVIS_TAG   = ${TRAVIS_TAG}
-TRAVIS_BRANCH   = ${TRAVIS_BRANCH}
+TRAVIS_TAG   := $(TRAVIS_TAG)
+TRAVIS_BRANCH   := $(TRAVIS_BRANCH)
 TEST_DEPS    = github.com/axw/gocov/gocov github.com/AlekSi/gocov-xml
 
 vendor:
