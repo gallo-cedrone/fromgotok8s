@@ -1,9 +1,9 @@
 # Don't assume PATH settings
 export PATH := $(PATH):$(GOPATH)/bin
-BINARY_NAME   := fromgotok8s
-GO_FILES     := ./src/
-TRAVIS_TAG ?= latest
-TEST_DEPS     = github.com/axw/gocov/gocov github.com/AlekSi/gocov-xml
+BINARY_NAME := fromgotok8s
+GO_FILES    := ./src/
+TRAVIS_TAG  ?= latest
+TEST_DEPS    = github.com/axw/gocov/gocov github.com/AlekSi/gocov-xml
 
 compile:
 	@echo "=== [ compile ]: building $(BINARY_NAME)..."
@@ -42,7 +42,7 @@ add-repo:
 
 push-app:
 	@echo "=== [ push-app ]: pushing app to k8s..."
-	@helm upgrade --install fromgotok8s-${TRAVIS_TAG} static-gallo-cedrone-repo/fromgotok8s   --set image.version=${TRAVIS_TAG}
+	@helm upgrade --install fromgotok8s-${TRAVIS_TAG:-latest} static-gallo-cedrone-repo/fromgotok8s   --set image.version=${TRAVIS_TAG:-latest}
 
 changelog:
 	@echo "=== [ changelog ]: generating changelog..."
