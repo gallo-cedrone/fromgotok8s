@@ -19,6 +19,7 @@ jobs:
     script:
       - make image
       - make push-image
+      - make add-repo
       - make push-app
     deploy:
       provider: releases
