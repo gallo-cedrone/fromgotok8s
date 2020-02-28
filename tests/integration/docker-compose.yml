@@ -13,9 +13,10 @@ services:
       - "FROMGOTOK8S_URL_GOOGLE=http://web"
 
   web:
+    container_name: simple_nginx_with_curl
     networks:
       - test
-    image: nginx
+    image: ewoutp/docker-nginx-curl
 
 networks:
   test:

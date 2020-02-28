@@ -1,4 +1,16 @@
 ##CHANGELOG
+#### 2020-02-28	gallo-cedrone	db15054	fix(integrationtests): improved and fixed integrations tests
+
+fix #1
+
+#### 2020-02-28	gallo-cedrone	50990d4	fix: asdfasgdfg
+
+2sdfgsdfgdsfg
+
+BREAKING CHANGE: Everything is broken
+
+4354657
+
 #### 2020-02-28	gallo-cedrone	691209d	feat(makefile): (38) i added the make changelog to makefile
 
 this change its important to automatize the whole process

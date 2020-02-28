@@ -16,7 +16,7 @@ Nice to add:
 
  - snyk to check vulnerabilities
  - terraform?
- - generate automatically rpm an push it to github
+ - generate automatically rpm and push it to github
  - generate automatically a release notes with commitizen
-
+ - coveralls
  - change example to avoid yes.....?
