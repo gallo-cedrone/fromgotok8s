@@ -1,3 +1,10 @@
+
+n.n.n / 2020-02-28
+==================
+
+  * CHANGELOG
+2020-02-28	gallo-cedrone		CHANGELOG
+
 2020-02-28	gallo-cedrone		style(testin touching the c): tESTING1
 
 TESTING2
