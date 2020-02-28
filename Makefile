@@ -39,4 +39,9 @@ push-app:
 	@echo "=== [ push-app ]: pushing app to k8s..."
 	@helm upgrade --install fromgotok8s-${TRAVIS_TAG} static-gallo-cedrone-repo/fromgotok8s   --set image.version=${TRAVIS_TAG}
 
-.PHONY: compile test integration-test vendor image push-image push-app
+changelog:
+	@echo "=== [ changelog ]: generating changelog..."
+	@echo "##CHANGELOG">CHANGELOG.md
+	@git --no-pager log master --date=short --pretty=format:"#### %ad%x09%an%x09%t%x09%s%n%n%b" --no-merges  >> CHANGELOG.md
+
+.PHONY: changelog compile test integration-test vendor image push-image push-app changelog
