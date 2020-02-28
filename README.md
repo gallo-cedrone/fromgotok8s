@@ -21,3 +21,4 @@ Nice to add:
  - generate automatically a release notes with commitizen
  - coveralls
  - change example to avoid yes.....?
+ - set properly latest for image and for tag create reference ${BRANCHNAME}${TAG} 
