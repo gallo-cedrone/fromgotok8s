@@ -4,17 +4,16 @@ BINARY_NAME := fromgotok8s
 GO_FILES    := ./src/
 TRAVIS_TAG   := $(TRAVIS_TAG)
 TRAVIS_BRANCH   := $(TRAVIS_BRANCH)
-TEST_DEPS    = github.com/axw/gocov/gocov github.com/AlekSi/gocov-xml
 
 vendor:
 	@echo "=== [ vendor ]: updating vendor folder..."
-	@go get -v $(TEST_DEPS)
 	@go mod vendor
 
 test: vendor
 	@echo "=== [ test ]: running unit tests..."
 	@go clean -cache -testcache
-	@gocov test $(GO_FILES) | gocov report
+	@go test $(GO_FILES) -v -covermode=count -coverprofile=coverage.out
+
 
 compile: vendor
 	@echo "=== [ compile ]: building $(BINARY_NAME)..."
