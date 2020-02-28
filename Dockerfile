@@ -4,5 +4,5 @@ WORKDIR /go/src/github.com/gallo-cedrone/fromgotok8s
 COPY . .
 RUN make compile
 
-FROM busybox
+FROM scratch
 COPY --from=builder /go/src/github.com/gallo-cedrone/fromgotok8s/bin/fromgotok8s /fromgotok8s
