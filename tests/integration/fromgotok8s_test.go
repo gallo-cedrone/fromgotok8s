@@ -12,7 +12,7 @@ import (
 func TestMainFunction(t *testing.T) {
 
 	var cmdLine []string
-	cmdLine = append(cmdLine, "exec", "-i", "-e", "FROMGOTOK8S_URL=http://web")
+	cmdLine = append(cmdLine, "exec", "-i", "-e", "FROMGOTOK8S_URL_GOOGLE=http://web")
 
 	cmdLine = append(cmdLine, "integration_fromgotok8s")
 	cmdLine = append(cmdLine, "/fromgotok8s")

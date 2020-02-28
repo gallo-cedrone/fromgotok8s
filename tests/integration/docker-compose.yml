@@ -8,7 +8,9 @@ services:
     build:
       context: ../../
       dockerfile: ./Dockerfile
-    entrypoint: /bin/yes
+    entrypoint: /fromgotok8s
+    environment:
+      - "FROMGOTOK8S_URL_GOOGLE=http://web"
 
   web:
     networks:

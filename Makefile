@@ -2,22 +2,24 @@
 export PATH := $(PATH):$(GOPATH)/bin
 BINARY_NAME   := fromgotok8s
 GO_FILES     := ./src/
-TRAVIS_TAG ?= latest 
+TRAVIS_TAG ?= latest
+TEST_DEPS     = github.com/axw/gocov/gocov github.com/AlekSi/gocov-xml
 
 compile:
 	@echo "=== [ compile ]: building $(BINARY_NAME)..."
 	@go build -v -o bin/$(BINARY_NAME) $(GO_FILES)
 
-test:
+test: vendor
 	@echo "=== [ test ]: running unit tests..."
 	@go clean -cache -testcache
-	@go test $(GO_FILES)
+	@gocov test $(GO_FILES) | gocov report
 
 vendor:
 	@echo "=== [ vendor ]: updating vendor folder..."
+	@go get -v $(TEST_DEPS)
 	@go mod vendor
 
-integration-test:
+integration-test: compile
 	@echo "=== [ integration test ]: running integration tests..."
 	@go clean -cache -testcache
 	@docker-compose -f tests/integration/docker-compose.yml up -d --build
