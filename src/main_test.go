@@ -5,11 +5,16 @@ import (
 	"io/ioutil"
 	"net/http"
 	"testing"
+	"time"
 )
 
 func TestMainFunction(t *testing.T) {
 	config()
 	server := startServer()
+	defer server.Shutdown(nil)
+
+	time.Sleep(500 * time.Millisecond)
+
 	resp, err := http.Get("http://localhost:8080")
 	if err != nil {
 		t.Fatal(err.Error())
@@ -21,10 +26,5 @@ func TestMainFunction(t *testing.T) {
 		t.Fatal(err.Error())
 	}
 	assert.Equal(t, string(data), "https://google.com answered with statusCode: 200")
-
-	err = server.Shutdown(nil)
-	if err != nil {
-		panic(err.Error())
-	}
 
 }
