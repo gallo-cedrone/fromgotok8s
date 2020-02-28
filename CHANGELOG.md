@@ -1,4 +1,7 @@
 ##CHANGELOG
+#### 2020-02-28	gallo-cedrone	a56b637	test
+
+
 #### 2020-02-28	gallo-cedrone	db15054	fix(integrationtests): improved and fixed integrations tests
 
 fix #1
