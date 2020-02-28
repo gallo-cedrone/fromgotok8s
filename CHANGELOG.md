@@ -1,4 +1,8 @@
 ##CHANGELOG
+#### 2020-02-28	gallo-cedrone	691209d	feat(makefile): (38) i added the make changelog to makefile
+
+this change its important to automatize the whole process
+
 #### 2020-02-28	gallo-cedrone	5db9d8b	test
 
 
