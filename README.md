@@ -1,4 +1,5 @@
 ### FROMGOTOK8s
+[![Build Status](https://travis-ci.org/gallo-cedrone/fromgotok8s.svg?branch=master)](https://travis-ci.org/gallo-cedrone/fromgotok8s)
 
 This project implements a proof of concept of a complete CI/CD for a golang project making use of the following tools:
 

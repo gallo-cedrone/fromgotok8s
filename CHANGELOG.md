@@ -1,4 +1,19 @@
-##CHANGELOG
+## CHANGELOG
+#### 2020-02-28	gallo-cedrone	a6f11c2	fix
+
+
+#### 2020-02-28	gallo-cedrone	2b391d4	test
+
+
+#### 2020-02-28	gallo-cedrone	df6d9d5	fix
+
+
+#### 2020-02-28	gallo-cedrone	f47bda6	fix(test2): test2
+
+test2
+
+re #2
+
 #### 2020-02-28	gallo-cedrone	a56b637	test
 
 
