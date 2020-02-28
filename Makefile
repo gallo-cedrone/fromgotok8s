@@ -35,13 +35,18 @@ push-image:
 	@docker login --username $(DOCKER_USERNAME) --password $(DOCKER_PASSWORD)
 	@docker push pgallina/fromgotok8s:latest
 
+add-repo:
+	@echo "=== [ add-repo ]: adding static repository to helm..."
+	@helm repo add static-gallo-cedrone-repo https://gallo-cedrone.github.io/fromgotok8s
+	@helm repo update
+
 push-app:
 	@echo "=== [ push-app ]: pushing app to k8s..."
 	@helm upgrade --install fromgotok8s-${TRAVIS_TAG} static-gallo-cedrone-repo/fromgotok8s   --set image.version=${TRAVIS_TAG}
 
 changelog:
 	@echo "=== [ changelog ]: generating changelog..."
-	@echo "##CHANGELOG">CHANGELOG.md
+	@echo "## CHANGELOG" > CHANGELOG.md
 	@git --no-pager log master --date=short --pretty=format:"#### %ad%x09%an%x09%t%x09%s%n%n%b" --no-merges  >> CHANGELOG.md
 
-.PHONY: changelog compile test integration-test vendor image push-image push-app changelog
+.PHONY: changelog compile test integration-test vendor image push-image push-app changelog add-repo
