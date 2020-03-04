@@ -42,7 +42,7 @@ add-repo:
 
 push-app: add-repo push-image
 	@echo "=== [ push-app ]: pushing app to k8s..."
-	helm upgrade --install fromgotok8s_${TRAVIS_BRANCH}_${TRAVIS_TAG} --namespace ${TRAVIS_BRANCH} --namespace static-gallo-cedrone-repo/fromgotok8s   --set image.version=${TRAVIS_BRANCH}-${TRAVIS_TAG}
+	helm upgrade --install fromgotok8s_${TRAVIS_BRANCH}_${TRAVIS_TAG} --namespace ${TRAVIS_BRANCH} static-gallo-cedrone-repo/fromgotok8s   --set image.version=${TRAVIS_BRANCH}-${TRAVIS_TAG}
 
 changelog:
 	@echo "=== [ changelog ]: generating changelog..."
