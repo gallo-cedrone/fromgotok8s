@@ -10,10 +10,11 @@ jobs:
       - go get golang.org/x/tools/cmd/cover
       - go get github.com/mattn/goveralls
     script:
-    - make vendor
-    - make test
-    - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci
-    - make integration-test
+      - sudo apt-get install go-dep
+      - make vendor
+      - make test
+      - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci
+      - make integration-test
   - stage: build and push image
     os: linux
     before_script:

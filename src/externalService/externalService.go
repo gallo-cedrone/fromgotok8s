@@ -19,7 +19,7 @@ func (g GoogleDependency) CallDependencies() int {
 	var err error
 	for i := 0; i < maxRetries; i++ {
 		resp, err = http.Get(viper.GetString("url.google"))
-		if err != nil {
+		if err == nil {
 			resp.Body.Close()
 			return resp.StatusCode
 		}
