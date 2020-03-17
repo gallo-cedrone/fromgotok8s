@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gallo-cedrone/fromgotok8s/src/externalService"
 	"github.com/magiconair/properties/assert"
 	"io/ioutil"
 	"net/http"
@@ -10,7 +11,7 @@ import (
 
 func TestMainFunction(t *testing.T) {
 	config()
-	server := startServer()
+	server := startServer(externalService.MockGoogleDependency{})
 	defer server.Shutdown(nil)
 
 	time.Sleep(500 * time.Millisecond)
