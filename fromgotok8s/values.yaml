@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: pgallina/fromgotok8s
   version: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 imagePullSecrets: []
 nameOverride: ""
