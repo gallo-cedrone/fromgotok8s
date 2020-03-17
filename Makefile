@@ -7,13 +7,11 @@ TRAVIS_BRANCH   := $(TRAVIS_BRANCH)
 
 vendor:
 	@echo "=== [ vendor ]: updating vendor folder..."
-	@go mod vendor
+	@dep ensure
 
 test: vendor
 	@echo "=== [ test ]: running unit tests..."
-	@go clean -cache -testcache
 	@go test $(GO_FILES) -v -covermode=count -coverprofile=coverage.out
-
 
 compile: vendor
 	@echo "=== [ compile ]: building $(BINARY_NAME)..."
@@ -21,7 +19,6 @@ compile: vendor
 
 integration-test: compile
 	@echo "=== [ integration test ]: running integration tests..."
-	@go clean -cache -testcache
 	@docker-compose -f tests/integration/docker-compose.yml up -d --build
 	@go test -v -tags=integration ./tests/integration/. || (ret=$$?; docker-compose -f tests/integration/docker-compose.yml down && exit $$ret)
 	@docker-compose -f tests/integration/docker-compose.yml down

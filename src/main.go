@@ -21,6 +21,7 @@ func startServer() *http.Server {
 	var err error
 	for range [3]int{} {
 		resp, err = http.Get(viper.GetString("url.google"))
+
 		time.Sleep(1 * time.Second)
 	}
 	if err != nil {
