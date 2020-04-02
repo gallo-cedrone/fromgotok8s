@@ -20,7 +20,8 @@ jobs:
     script:
       - make tools-and-vars
       - make image
-      - if [ ${TRAVIS_PULL_REQUEST} != false ] ; then
+      - |
+        if [ ${TRAVIS_PULL_REQUEST} != "false" ] ; then
           exit 0
         fi
         make push-image
