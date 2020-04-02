@@ -25,12 +25,12 @@ integration-test: compile
 
 image:
 	@echo "=== [ image ]: building image..."
-	@docker build -t pgallina/fromgotok8s:${TRAVIS_BRANCH}-${TRAVIS_TAG} .
+	docker build -t pgallina/fromgotok8s:${TRAVIS_BRANCH}-${TRAVIS_TAG} .
 
 push-image: image
 	@echo "=== [ push-image ]: pushing image..."
 	@docker login --username pgallina --password $(DOCKER_PASSWORD)
-	@docker push pgallina/fromgotok8s:${TRAVIS_BRANCH}-${TRAVIS_TAG}
+	docker push pgallina/fromgotok8s:${TRAVIS_BRANCH}-${TRAVIS_TAG}
 
 set-cluster:
 	@echo "=== [ set-cluster ]: Setting Kubernetes Cluster..."
@@ -61,10 +61,6 @@ tools-and-vars:
 	@tar -zxvf helm-v3.1.1-linux-amd64.tar.gz
 	@sudo mv linux-amd64/helm /usr/local/bin/helm
 	@echo ${GCLOUD_SERVICE_ACCOUNT} | base64 -d > keyfile.json
-	@export TRAVIS_TAG=${TRAVIS_TAG:-latest}
-	@export TRAVIS_TAG=${TRAVIS_TAG//[^a-z0-9$]/}
-	@export TRAVIS_BRANCH=${TRAVIS_BRANCH:-develop}
-	@export TRAVIS_BRANCH=${TRAVIS_BRANCH//[^a-z0-9$]/}
 
 
 .PHONY: changelog compile test integration-test vendor image push-image push-app changelog add-repo set-cluster tools-and-vars
