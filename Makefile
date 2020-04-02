@@ -45,6 +45,7 @@ add-repo:
 
 push-app: add-repo push-image
 	@echo "=== [ push-app ]: pushing app to k8s..."
+	kubectl create namespace ${TRAVIS_BRANCH} || true
 	helm upgrade fromgotok8s_${TRAVIS_BRANCH}_${TRAVIS_TAG} static-gallo-cedrone-repo/fromgotok8s --create-namespace --install --namespace ${TRAVIS_BRANCH} --set image.version=${TRAVIS_BRANCH}-${TRAVIS_TAG}
 
 changelog:
@@ -60,6 +61,9 @@ tools-and-vars:
 	@curl https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz > helm-v3.1.1-linux-amd64.tar.gz
 	@tar -zxvf helm-v3.1.1-linux-amd64.tar.gz
 	@sudo mv linux-amd64/helm /usr/local/bin/helm
+	@curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
+	@chmod +x ./kubectl
+	@sudo mv ./kubectl /usr/local/bin/kubectl
 	@echo ${GCLOUD_SERVICE_ACCOUNT} | base64 -d > keyfile.json
 
 
