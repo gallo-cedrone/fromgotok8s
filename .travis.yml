@@ -17,18 +17,12 @@ jobs:
       - make integration-test
   - stage: build and push image
     os: linux
-    before_script:
-      - sudo apt-get install apt-transport-https ca-certificates gnupg
-      - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-      - sudo apt-get update && sudo apt-get install google-cloud-sdk
-      - curl https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz > helm-v3.1.1-linux-amd64.tar.gz
-      - tar -zxvf helm-v3.1.1-linux-amd64.tar.gz
-      - sudo mv linux-amd64/helm /usr/local/bin/helm
-      - echo $(GCLOUD_SERVICE_ACCOUNT) | base64 -D > keyfile.json
     script:
-      - export TRAVIS_TAG=${TRAVIS_TAG:-latest}
-      - export TRAVIS_BRANCH=${TRAVIS_BRANCH:-develop}
+      - make tools-and-vars
       - make image
+      - if [ "TRAVIS_PULL_REQUEST" != false ] ; then
+          exit 0
+        fi
       - make push-image
       - make add-repo
       - make set-cluster

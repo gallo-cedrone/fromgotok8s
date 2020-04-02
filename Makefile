@@ -25,12 +25,12 @@ integration-test: compile
 
 image:
 	@echo "=== [ image ]: building image..."
-	@docker build -t pgallina/fromgotok8s:latest .
+	@docker build -t pgallina/fromgotok8s:${TRAVIS_BRANCH}-${TRAVIS_TAG} .
 
 push-image: image
 	@echo "=== [ push-image ]: pushing image..."
 	@docker login --username $(DOCKER_USERNAME) --password $(DOCKER_PASSWORD)
-	@docker push pgallina/fromgotok8s:latest
+	@docker push -f pgallina/fromgotok8s:${TRAVIS_BRANCH}-${TRAVIS_TAG}
 
 set-cluster:
 	@echo "=== [ set-cluster ]: Setting Kubernetes Cluster..."
@@ -45,11 +45,26 @@ add-repo:
 
 push-app: add-repo push-image
 	@echo "=== [ push-app ]: pushing app to k8s..."
-	helm upgrade --install fromgotok8s_${TRAVIS_BRANCH}_${TRAVIS_TAG} --namespace ${TRAVIS_BRANCH} --namespace static-gallo-cedrone-repo/fromgotok8s   --set image.version=${TRAVIS_BRANCH}-${TRAVIS_TAG}
+	helm upgrade fromgotok8s_${TRAVIS_BRANCH}_${TRAVIS_TAG} static-gallo-cedrone-repo/fromgotok8s --install --namespace ${TRAVIS_BRANCH} --namespace static-gallo-cedrone-repo/fromgotok8s --set image.version=${TRAVIS_BRANCH}-${TRAVIS_TAG}
 
 changelog:
 	@echo "=== [ changelog ]: generating changelog..."
 	@echo "## CHANGELOG" > CHANGELOG.md
 	@git --no-pager log master --date=short --pretty=format:"#### %ad%x09%an%x09%t%x09%s%n%n%b" --no-merges  >> CHANGELOG.md
 
-.PHONY: changelog compile test integration-test vendor image push-image push-app changelog add-repo set-cluster
+tools-and-vars:
+	@echo "=== [ tools-and-vars ]: installing tools..."
+	@sudo apt-get install apt-transport-https ca-certificates gnupg
+	@curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+	@sudo apt-get update && sudo apt-get install google-cloud-sdk
+	@curl https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz > helm-v3.1.1-linux-amd64.tar.gz
+	@tar -zxvf helm-v3.1.1-linux-amd64.tar.gz
+	@sudo mv linux-amd64/helm /usr/local/bin/helm
+	@echo ${GCLOUD_SERVICE_ACCOUNT} | base64 -D > keyfile.json
+	@export TRAVIS_TAG=${TRAVIS_TAG:-latest}
+	@export TRAVIS_TAG=${TRAVIS_TAG//[^a-z0-9$]/}
+	@export TRAVIS_BRANCH=${TRAVIS_BRANCH:-develop}
+	@export TRAVIS_BRANCH=${TRAVIS_BRANCH//[^a-z0-9$]/}
+
+
+.PHONY: changelog compile test integration-test vendor image push-image push-app changelog add-repo set-cluster tools-and-vars
