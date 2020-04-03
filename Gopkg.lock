@@ -48,20 +48,20 @@
   version = "v1.8.1"
 
 [[projects]]
-  digest = "1:53bc4cd4914cd7cd52139990d5170d6dc99067ae31c56530621b18b35fc30318"
+  digest = "1:6ea2d98ba8ae7c06a918970661b744be5d1a385c40917b9c317e9a4f2c36ac6f"
   name = "github.com/mitchellh/mapstructure"
   packages = ["."]
   pruneopts = "UT"
-  revision = "3536a929edddb9a5b34bd6861dc4a9647cb459fe"
-  version = "v1.1.2"
+  revision = "694aaefbc689be1915c2ef39e880409057931a94"
+  version = "v1.2.2"
 
 [[projects]]
-  digest = "1:6eea828983c70075ca297bb915ffbcfd3e34c5a50affd94428a65df955c0ff9c"
+  digest = "1:1d835d5c3153aceef96c2d58866edde1aa70e25339831cff07b1e47456410e5c"
   name = "github.com/pelletier/go-toml"
   packages = ["."]
   pruneopts = "UT"
-  revision = "903d9455db9ff1d7ac1ab199062eca7266dd11a3"
-  version = "v1.6.0"
+  revision = "8e8d2a6aad23fcaa64716c5fa6975ec3abbf8281"
+  version = "v1.7.0"
 
 [[projects]]
   digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
@@ -132,11 +132,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:3db6d378edb70703966c0eebd90a98884b8a8985c146d07fa15ca7ef6d91fe4c"
+  digest = "1:842f1500cf319662226ee2f897aa1bf5e9228bb851af8a9aaef5c425fe90f14e"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "5766fd39f98ddd8d769ad4aedcee557dd28de90f"
+  revision = "c3d80250170dec19bf61949c81233cede5ddaf61"
 
 [[projects]]
   digest = "1:1093f2eb4b344996604f7d8b29a16c5b22ab9e1b25652140d3fede39f640d5cd"

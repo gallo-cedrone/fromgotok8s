@@ -10,23 +10,27 @@ jobs:
       - go get golang.org/x/tools/cmd/cover
       - go get github.com/mattn/goveralls
     script:
-    - make vendor
-    - make test
-    - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci
-    - make integration-test
+      - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+      - make test
+      - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci
+      - make integration-test
   - stage: build and push image
     os: linux
-    before_script:
-      - curl https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz > helm-v3.1.1-linux-amd64.tar.gz
-      - tar -zxvf helm-v3.1.1-linux-amd64.tar.gz
-      - sudo mv linux-amd64/helm /usr/local/bin/helm
     script:
       - export TRAVIS_TAG=${TRAVIS_TAG:-latest}
+      - export TRAVIS_TAG=${TRAVIS_TAG//[^a-z0-9$]/}
       - export TRAVIS_BRANCH=${TRAVIS_BRANCH:-develop}
+      - export TRAVIS_BRANCH=${TRAVIS_BRANCH//[^a-z0-9$]/}
+      - make tools-and-vars
       - make image
-      - make push-image
-      - make add-repo
-      - make push-app
+      - |
+        if [ ${TRAVIS_PULL_REQUEST} != "false" ] ; then
+          exit 0
+        fi
+        make push-image
+        make add-repo
+        make set-cluster
+        make push-app
     deploy:
       provider: releases
       file_glob: true
