@@ -2,7 +2,7 @@
 export PATH := $(PATH):$(GOPATH)/bin
 BINARY_NAME := fromgotok8s
 GO_FILES    := ./src/
-TRAVIS_TAG_SANITIZED   := $(TRAVIS_TAG_SANITIZED)
+TRAVIS_COMMIT_SANITIZED   := $(TRAVIS_COMMIT_SANITIZED)
 TRAVIS_BRANCH_SANITIZED   := $(TRAVIS_BRANCH_SANITIZED)
 
 vendor:
@@ -25,12 +25,12 @@ integration-test:
 
 image:
 	@echo "=== [ image ]: building image..."
-	docker build -t pgallina/fromgotok8s:${TRAVIS_BRANCH_SANITIZED}-${TRAVIS_TAG_SANITIZED} .
+	docker build -t pgallina/fromgotok8s:${TRAVIS_BRANCH_SANITIZED}-${TRAVIS_COMMIT_SANITIZED} .
 
 push-image:
 	@echo "=== [ push-image ]: pushing image..."
 	@docker login --username pgallina --password $(DOCKER_PASSWORD)
-	docker push pgallina/fromgotok8s:${TRAVIS_BRANCH_SANITIZED}-${TRAVIS_TAG_SANITIZED}
+	docker push pgallina/fromgotok8s:${TRAVIS_BRANCH_SANITIZED}-${TRAVIS_COMMIT_SANITIZED}
 
 set-cluster:
 	@echo "=== [ set-cluster ]: Setting Kubernetes Cluster..."
@@ -46,7 +46,7 @@ add-repo:
 push-app:
 	@echo "=== [ push-app ]: pushing app to k8s..."
 	kubectl create namespace ${TRAVIS_BRANCH_SANITIZED} || true
-	helm upgrade fromgotok8s-${TRAVIS_BRANCH_SANITIZED}-${TRAVIS_TAG_SANITIZED} static-gallo-cedrone-repo/fromgotok8s --install --namespace ${TRAVIS_BRANCH_SANITIZED} --set image.version=${TRAVIS_BRANCH_SANITIZED}-${TRAVIS_TAG_SANITIZED}
+	helm upgrade fromgotok8s-${TRAVIS_BRANCH_SANITIZED}-${TRAVIS_COMMIT_SANITIZED} static-gallo-cedrone-repo/fromgotok8s --install --namespace ${TRAVIS_BRANCH_SANITIZED} --set image.version=${TRAVIS_BRANCH_SANITIZED}-${TRAVIS_COMMIT_SANITIZED}
 
 changelog:
 	@echo "=== [ changelog ]: generating changelog..."
