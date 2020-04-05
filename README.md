@@ -1,6 +1,8 @@
 ![fromgotok8s](fromgotok8s.png)
 
-This GitHub page is used mostly to be used as a static public Chartmuseum and it is part of a full example of Ci/CD described in this medium article.
+This GitHub page is used mostly to be used as a static public Chartmuseum and it is part of a full example of Ci/CD described in the following medium article:
+
+ - https://medium.com/@paolo.gallina/fromgotok8s-a-complete-ci-di-example-2ee49dd39f20
 
 To build the helm package to add it to the static chartmuseum
 ```sh
