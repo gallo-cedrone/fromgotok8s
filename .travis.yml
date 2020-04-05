@@ -17,7 +17,7 @@ jobs:
   - stage: build and push image
     os: linux
     script:
-      - export TRAVIS_COMMIT_SANITIZED=${TRAVIS_COMMIT:-latest}
+      - export TRAVIS_COMMIT_SANITIZED=${TRAVIS_COMMIT:0:7}
       - export TRAVIS_COMMIT_SANITIZED=${TRAVIS_COMMIT_SANITIZED//[^a-z0-9$]/}
       - export TRAVIS_BRANCH_SANITIZED=${TRAVIS_BRANCH:-develop}
       - export TRAVIS_BRANCH_SANITIZED=${TRAVIS_BRANCH_SANITIZED//[^a-z0-9$]/}
