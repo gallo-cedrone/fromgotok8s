@@ -19,6 +19,6 @@ This project implements a proof of concept of a complete CI/CD for a golang proj
  - snyk to check vulnerabilities
  
 
-The whole process is described in a series of medium articles.
+The whole process is described in a series of medium articles: https://medium.com/@paolo.gallina/fromgotok8s-a-complete-ci-di-example-2ee49dd39f20.
 
  ![Let's GOgif!](./images/go.gif)
