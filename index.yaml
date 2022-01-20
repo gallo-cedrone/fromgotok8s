@@ -10,4 +10,40 @@ entries:
     urls:
     - fromgotok8s-0.1.0.tgz
     version: 0.1.0
+  - apiVersion: v2
+    created: "2020-04-03T18:43:04.012168+02:00"
+    description: A Helm chart for Kubernetes
+    digest: c6c457b5588f74ec98c9101cdf83f70330b754838f753ef4e8d3f5673caeaf12
+    name: fromgotok8s
+    type: application
+    urls:
+    - fromgotok8s-0.1.0.tgz
+    version: 1.0.0-beta
+  - apiVersion: v2
+    created: "2020-04-03T18:43:04.012168+02:00"
+    description: A Helm chart for Kubernetes
+    digest: c6c457b5588f74ec98c9101cdf83f70330b754838f753ef4e8d3f5673caeaf12
+    name: fromgotok8s
+    type: application
+    urls:
+    - fromgotok8s-0.1.0.tgz
+    version: 0.2.0-alfa
+  - apiVersion: v2
+    created: "2020-04-03T18:43:04.012168+02:00"
+    description: A Helm chart for Kubernetes
+    digest: c6c457b5588f74ec98c9101cdf83f70330b754838f753ef4e8d3f5673caeaf12
+    name: fromgotok8s
+    type: application
+    urls:
+    - fromgotok8s-0.1.0.tgz
+    version: 0.3.0-2
+  - apiVersion: v2
+    created: "2020-04-03T18:43:04.012168+02:00"
+    description: A Helm chart for Kubernetes
+    digest: c6c457b5588f74ec98c9101cdf83f70330b754838f753ef4e8d3f5673caeaf12
+    name: fromgotok8s
+    type: application
+    urls:
+    - fromgotok8s-0.1.0.tgz
+    version: 0.3.0-carlo
 generated: "2020-04-03T18:43:04.006814+02:00"
